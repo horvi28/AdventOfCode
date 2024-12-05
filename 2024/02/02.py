@@ -2,17 +2,29 @@
 
 import numpy as np
 
+def is_safe(report: list) -> bool:
+    diff = np.diff(report)
+
+    monotonous_increase = np.all(np.logical_and(diff > 0, diff < 4))
+    monotonous_decrease = np.all(np.logical_and(diff < 0, diff > -4))
+    return monotonous_increase or monotonous_decrease
+
+# Brute force
+def problem_dampener_can_make_it_safe(report: list) -> bool:
+    for i in range(0, len(report)):
+        if is_safe(np.delete(report, i)):
+            return True
+    return False
+
 safe_report = 0
 with open('./AdventOfCode/2024/02/input.txt', 'r') as f:
     for line in f:
         report = np.fromstring(line, dtype=int, sep=' ')
-        diff = np.diff(report)
 
-        monotonous_increase = np.all(np.logical_and(diff > 0, diff < 4))
-        monotonous_decrease = np.all(np.logical_and(diff < 0, diff > -4))
-        safe = monotonous_increase or monotonous_decrease
-        if safe:
+        if is_safe(report) or problem_dampener_can_make_it_safe(report):
+            print(f'{report}: Safe')
             safe_report += 1
-        #print(f'{report} -> Safe? {safe}')
+        else:
+            print(f'{report}: Unsafe')
 
-print(f'Number of safe reports: {safe_report}')
+    print(f'Number of safe reports: {safe_report}')
