@@ -2,7 +2,7 @@ import itertools
 from typing import List
 
 def gen_operation(numbers: List[str]):
-    operators = ['+', '*']
+    operators = ['+', '*', '||']
     for t in itertools.product(operators, repeat=len(numbers) - 1):
         yield ''.join(x + ' ' + y + ' ' for x, y in zip(numbers, t)) + numbers[-1]
 
@@ -13,8 +13,11 @@ def eval_operators(combination: str) -> int:
     for i in range(1, len(a) - 1, 2):
         operator = a[i]
         num = a[i + 1]
-        total = eval(str(total) + operator + num)
-    return total
+        if operator == '||':
+            total = str(total) + num
+        else:
+            total = eval(str(total) + operator + num)
+    return int(total)
 
 
 def is_valid_test_value(test_value: int, numbers: List[str]) -> bool:
@@ -27,7 +30,7 @@ def is_valid_test_value(test_value: int, numbers: List[str]) -> bool:
         # the precedence doesn't matter here
         total = eval_operators(combination)
         if total == test_value:
-            print(f'{test_value} can be produced with: {combination}')
+            #print(f'{test_value} can be produced with: {combination}')
             return True
     return False
 
@@ -40,7 +43,7 @@ with open('./AdventOfCode/2024/07/input.txt', 'r') as f:
         test_value = int(data[0])
         numbers = data[1].split()
 
-        print(f'Test value: {test_value}, numbers: {numbers}')
+        #print(f'Test value: {test_value}, numbers: {numbers}')
 
         if is_valid_test_value(test_value, numbers):
             sum += test_value
