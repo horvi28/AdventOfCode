@@ -21,11 +21,11 @@ def get_maximum_joltage(battery_bank: str, num_batteries: int) -> int:
         remaining_digits -= 1
     return int(maximum_joltage)
 
-with open('./2025/03/testinput.txt', 'r') as f:
+with open('./2025/03/input.txt', 'r') as f:
     total_joltage = 0
     for line in f:
         line = line.rstrip()
-        maximum_joltage = get_maximum_joltage(line, 2)
+        maximum_joltage = get_maximum_joltage(line, 12)
         print(f'Maximum joltage for current line {maximum_joltage}')
         total_joltage += maximum_joltage
 
