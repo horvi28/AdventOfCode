@@ -57,7 +57,7 @@ def add_antinode(antinode: np.ndarray) -> None:
         antinodes[tuple(antinode)] = True
 
 
-with open('./AdventOfCode/2024/08/input.txt', 'rt') as f:
+with open('./2024/08/input.txt', 'rt') as f:
     map =  np.array([list(line.strip()) for line in f.readlines()])
     print('Initial map:')
     print(map)

@@ -14,7 +14,7 @@ def is_update_in_correct_order(update: list, rules: List[list]) -> bool:
 
 rules = []
 updates = []
-with open('./AdventOfCode/2024/05/input.txt', 'r') as f:
+with open('./2024/05/input.txt', 'r') as f:
     for line in f:
         line = line.rstrip()
         if '|' in line:

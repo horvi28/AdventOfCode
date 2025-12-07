@@ -49,7 +49,7 @@ def get_new_pos_and_direction(direction: str, pos: List[int], steps: int) -> Tup
     
     return new_pos, new_direction
 
-with open('./AdventOfCode/2024/06/input.txt', 'rt') as f:
+with open('./2024/06/input.txt', 'rt') as f:
     map =  np.array([list(line.strip()) for line in f.readlines()])
     print('Initial map:')
     print(map)

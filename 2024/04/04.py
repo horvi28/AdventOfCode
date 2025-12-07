@@ -3,7 +3,7 @@
 import numpy as np
 
 # Read the data into a matrix of characters
-data = np.genfromtxt('./AdventOfCode/2024/04/input.txt', dtype='str')
+data = np.genfromtxt('./2024/04/input.txt', dtype='str')
 data = np.array([list(line) for line in data])
 
 ## Helper method to look for the next characters in any direction

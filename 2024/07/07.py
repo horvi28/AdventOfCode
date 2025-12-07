@@ -36,7 +36,7 @@ def is_valid_test_value(test_value: int, numbers: List[str]) -> bool:
 
 
 sum = 0
-with open('./AdventOfCode/2024/07/input.txt', 'r') as f:
+with open('./2024/07/input.txt', 'r') as f:
     for line in f:
         line = line.rstrip()
         data = line.split(':')

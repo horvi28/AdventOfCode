@@ -17,7 +17,7 @@ def problem_dampener_can_make_it_safe(report: list) -> bool:
     return False
 
 safe_report = 0
-with open('./AdventOfCode/2024/02/input.txt', 'r') as f:
+with open('./2024/02/input.txt', 'r') as f:
     for line in f:
         report = np.fromstring(line, dtype=int, sep=' ')
 

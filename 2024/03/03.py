@@ -2,7 +2,7 @@
 
 import re
 
-with open('./AdventOfCode/2024/03/input.txt', 'r') as f:
+with open('./2024/03/input.txt', 'r') as f:
     memory = f.read()
     
     #Remove don't() sequences
