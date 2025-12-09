@@ -41,10 +41,10 @@ class Grid:
         if y in range(0, self.height):
             return [row[y] for row in self.data]
 
-    def get_above(self, x: int, y: int) -> str | None:
+    def get_upper(self, x: int, y: int) -> str | None:
         return self.get(x + 1, y)
     
-    def get_below(self, x: int, y: int) -> str | None:
+    def get_lower(self, x: int, y: int) -> str | None:
         return self.get(x - 1, y)
     
     def get_left(self, x: int, y: int) -> str | None:
@@ -53,12 +53,34 @@ class Grid:
     def get_right(self, x: int, y: int) -> str | None:
         return self.get(x, y + 1)
 
-    def get_neighbours(self, x: int, y: int) -> list[str | None]:
-        up = self.get_above(x, y)
-        down = self.get_below(x, y)
+    def get_upper_left(self, x: int, y: int) -> str | None:
+        return self.get(x + 1, y - 1)
+    
+    def get_upper_right(self, x: int, y: int) -> str | None:
+        return self.get(x + 1, y + 1)
+    
+    def get_lower_left(self, x: int, y: int) -> str | None:
+        return self.get(x - 1, y - 1)
+    
+    def get_lower_right(self, x: int, y: int) -> str | None:
+        return self.get(x - 1, y + 1)
+
+    def get_direct_neighbours(self, x: int, y: int) -> list[str | None]:
+        upper = self.get_upper(x, y)
+        lower = self.get_lower(x, y)
         left = self.get_left(x, y)
         right = self.get_right(x, y)
-        return [up, down, left, right]
+        return [upper, lower, left, right]
+    
+    def get_diagonal_neighbours(self, x: int, y: int) -> list[str | None]:
+        upper_left = self.get_upper_left(x, y)
+        upper_right = self.get_upper_right(x, y)
+        lower_left = self.get_lower_left(x, y)
+        lower_right = self.get_lower_right(x, y)
+        return [upper_left, upper_right, lower_left, lower_right]
+    
+    def get_neighbours(self, x: int, y: int) -> list[str | None]:
+        return self.get_direct_neighbours(x, y) + self.get_diagonal_neighbours(x, y)
 
     def __str__(self) -> str:
         return '\n'.join(''.join(row) for row in self.data)
