@@ -82,5 +82,10 @@ class Grid:
     def get_neighbours(self, x: int, y: int) -> list[str | None]:
         return self.get_direct_neighbours(x, y) + self.get_diagonal_neighbours(x, y)
 
+    def __iter__(self):
+        for x in range(self.width):
+            for y in range(self.height):
+                yield (x, y, self.data[x][y])
+
     def __str__(self) -> str:
         return '\n'.join(''.join(row) for row in self.data)
