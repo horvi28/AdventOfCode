@@ -2,6 +2,13 @@ import math
 
 
 def get_next_operator(line: str, offset: int) -> tuple[str, int]:
+    """
+    Get the next operator in the operator row and it's position after an offset position
+    
+    :param line: The operator row, which consist of operator (+ or *) and spaces
+    :param offset: The starting position for the searching, we only want to find the next operator starting from the current one
+    :return: The operator and it's position
+    """
     operators_look_for = ['+', '*']
     for index, character in enumerate(line[offset:], offset):
         if character in operators_look_for:
@@ -10,6 +17,15 @@ def get_next_operator(line: str, offset: int) -> tuple[str, int]:
 
 
 def get_vertical_numbers_for_sub_result(lines: list[str], offset: int, number_size) -> list[int]:
+    """
+    Returns with a list of the numbers for the sub problem as per specificied in the challenge.
+    The numbers are defined vertically in character matrix, and it really matters where the spaces are
+    
+    :param lines: A list with the rows containing the numbers, it is basically a character matrix
+    :param offset: Starting position for the extraction
+    :param number_size: Size of the numbers, this specifies how long numbers are we looking for
+    :return: A list with numbers to calculate the sub result
+    """
     numbers = []
     for digit_index in range(offset, offset + number_size):
         number = ''
@@ -20,13 +36,16 @@ def get_vertical_numbers_for_sub_result(lines: list[str], offset: int, number_si
 
 
 def calculate_sub_result(numbers: list[int], operator: str) -> int:
-        if operator == '+':
-            sub_result = sum(numbers)
-        else:
-            sub_result = math.prod(numbers)
-        
-        print(f'Sub result is {sub_result}')
-        return sub_result
+    """
+    Calculate the sub result, based the given operator
+    """
+    if operator == '+':
+        sub_result = sum(numbers)
+    else:
+        sub_result = math.prod(numbers)
+    
+    print(f'Sub result is {sub_result}')
+    return sub_result
 
 
 with open('./2025/06/input.txt', 'r') as f:
