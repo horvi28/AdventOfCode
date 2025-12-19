@@ -12,4 +12,4 @@ for problem in problems_T:
         total += sum(numbers)
     else:
         total += math.prod(numbers)
-print(f"Total sum of problems: {total}")
+print(f"Total sum of sub results: {total}")
