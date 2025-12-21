@@ -30,7 +30,7 @@ class Grid:
         if x in range(0, self.width) and y in range(0, self.height):
             self.data[x][y] = char
 
-    def get_dimensions(self) -> tuple:
+    def get_dimensions(self) -> tuple[int, int]:
         return (self.width, self.height)
     
     def get_row(self, x: int) -> list[str]:
