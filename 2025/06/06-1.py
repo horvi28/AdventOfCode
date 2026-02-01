@@ -1,5 +1,8 @@
 import numpy as np
 import math
+from aoc_input import get_input_file
+
+input_path = get_input_file(2025, 6)
 
 problems = np.loadtxt('./2025/06/testinput.txt', dtype=str)
 problems_T = problems.transpose()

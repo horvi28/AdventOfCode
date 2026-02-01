@@ -1,4 +1,5 @@
 from grid import Grid
+from aoc_input import get_input
 
 def accessable_papers(grid: Grid, remove: bool = False) -> int:
     """
@@ -20,18 +21,18 @@ def accessable_papers(grid: Grid, remove: bool = False) -> int:
                     grid.set(x, y, 'x')
     return accessable
 
-with open('./2025/04/testinput.txt', 'r') as f:
-    lines = f.readlines()
-    grid = Grid.from_lines(lines)
-    total_accessable = 0
-    while True:
-        # TODO: Make a nice animation here
-        print("Map of the roll of papers:")
-        print(grid)
-        accessable = accessable_papers(grid, True)
-        total_accessable += accessable
-        print(f"{accessable} roll of paper is accessable.\n")
-        if accessable == 0:
-            break
+input = get_input(2025, 4)
+lines = input.splitlines()
+grid = Grid.from_lines(lines)
+total_accessable = 0
+while True:
+    # TODO: Make a nice animation here
+    print("Map of the roll of papers:")
+    print(grid)
+    accessable = accessable_papers(grid, True)
+    total_accessable += accessable
+    print(f"{accessable} roll of paper is accessable.\n")
+    if accessable == 0:
+        break
 
 print(f"The total accessable roll of papers after removing them: {total_accessable}")

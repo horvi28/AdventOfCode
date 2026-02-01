@@ -1,4 +1,4 @@
-# https://adventofcode.com/2025/day/3
+from aoc_input import get_input
 
 def get_maximum_joltage(battery_bank: str, num_batteries: int) -> int:
     # Okey after thinking a bit
@@ -21,12 +21,14 @@ def get_maximum_joltage(battery_bank: str, num_batteries: int) -> int:
         remaining_digits -= 1
     return int(maximum_joltage)
 
-with open('./2025/03/input.txt', 'r') as f:
-    total_joltage = 0
-    for line in f:
-        line = line.rstrip()
-        maximum_joltage = get_maximum_joltage(line, 12)
-        print(f'Maximum joltage for current line {maximum_joltage}')
-        total_joltage += maximum_joltage
+input = get_input(2025, 3)
+lines = input.splitlines()
+
+total_joltage = 0
+for line in lines:
+    line = line.rstrip()
+    maximum_joltage = get_maximum_joltage(line, 12)
+    print(f'Maximum joltage for current line {maximum_joltage}')
+    total_joltage += maximum_joltage
 
 print(f'Total output joltage: {total_joltage}')

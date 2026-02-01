@@ -1,3 +1,5 @@
+from aoc_input import get_input
+
 def merge_intervals(intervals: list[list]) -> tuple[list[list], int]:
     """
     It sorts and merges the overlapping intervals given by 'intervals'.
@@ -32,21 +34,23 @@ def merge_intervals(intervals: list[list]) -> tuple[list[list], int]:
 
     return merged_intervals, interval_size
 
-with open('./2025/05/input.txt', 'r') as f:
-    fresh_ingredients_ranges = []
-    
-    for line in f:
-        # Until the first blank line the fresh ingredient ID ranges are coming
-        if line == "\n":
-            break
+input = get_input(2025, 5)
+lines = input.splitlines()
 
-        # Create a range
-        bounds = line.rstrip().split('-')
-        lower = int(bounds[0])
-        upper = int(bounds[1]) + 1
-        fresh_ingredients_ranges.append([lower, upper])
-    
-    # Order the intervals and merge them
-    _, fresh_ids = merge_intervals(fresh_ingredients_ranges)
+fresh_ingredients_ranges = []
+
+for line in lines:
+    # Until the first blank line the fresh ingredient ID ranges are coming
+    if line == "":
+        break
+
+    # Create a range
+    bounds = line.rstrip().split('-')
+    lower = int(bounds[0])
+    upper = int(bounds[1]) + 1
+    fresh_ingredients_ranges.append([lower, upper])
+
+# Order the intervals and merge them
+_, fresh_ids = merge_intervals(fresh_ingredients_ranges)
 
 print(f"Overall there are {fresh_ids} fresh ids")

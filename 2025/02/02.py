@@ -1,4 +1,4 @@
-# https://adventofcode.com/2025/day/2
+from aoc_input import get_input
 
 from typing import List
 
@@ -33,17 +33,18 @@ def has_repetead_sequence(id: int) -> bool:
             return True
     return False
 
-with open('./2025/02/input.txt', 'r') as f:
-    id_ranges = get_id_ranges(f.readline())
+input = get_input(2025, 2, True).replace('\n', '')
 
-    invalid_sum = 0
-    
-    # Brute force:
-    # Go through all the ranges, and all the numbers and check if they are valid
-    for id_range in id_ranges:
-        for product_id in range(id_range[0], id_range[1] + 1): # Include the end of the range as well
-            if has_repetead_sequence(product_id):
-                print(f"Invalid product ID has found: {product_id}")
-                invalid_sum += product_id
+id_ranges = get_id_ranges(input)
+
+invalid_sum = 0
+
+# Brute force:
+# Go through all the ranges, and all the numbers and check if they are valid
+for id_range in id_ranges:
+    for product_id in range(id_range[0], id_range[1] + 1): # Include the end of the range as well
+        if has_repetead_sequence(product_id):
+            print(f"Invalid product ID has found: {product_id}")
+            invalid_sum += product_id
 
 print(f"Sum of invalid product IDs: {invalid_sum}")
