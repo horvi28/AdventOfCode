@@ -2,14 +2,13 @@ import os
 import requests
 from pathlib import Path
 
-def get_input(year: int, day: int):
+def get_input_file(year: int, day: int) -> Path:
     """
-    Download or retrieve cached Advent of Code input.
+    Download the Advent of Code input file if not exist yet and put into the .aoc_cache folder
     
     Args:
-        year: Year of the puzzle (e.g., 2025)
-        day: Day of the puzzle (1-25)
-        use_test: If True, looks for testinput.txt locally
+        year: Year of the puzzle
+        day: Day of the puzzle
     
     Returns:
         String containing the input data
@@ -21,8 +20,7 @@ def get_input(year: int, day: int):
     
     # Return cached input if it exists
     if cache_file.exists():
-        with open(cache_file, 'r') as f:
-            return f.read()
+        return cache_file
     
     # Download from AOC website
     session_cookie = os.environ.get('AOC_SESSION')
@@ -44,4 +42,20 @@ def get_input(year: int, day: int):
     with open(cache_file, 'w') as f:
         f.write(response.text)
     
-    return response.text
+    return cache_file
+
+def get_input(year: int, day: int) -> str:
+    """
+    Retrieve with the puzzle input
+    
+    Args:
+        year: Year of the puzzle
+        day: Day of the puzzle
+    
+    Returns:
+        String containing the input data
+    """
+
+    input_path = get_input_file(year, day)
+    with open(input_path, 'r') as f:
+        return f.read()
