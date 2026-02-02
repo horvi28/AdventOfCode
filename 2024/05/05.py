@@ -1,7 +1,6 @@
-# https://adventofcode.com/2024/day/5
-
 from typing import List
 import numpy as np
+from aoc_input import get_input
 
 def is_rule_violated(update: list, preceding: int, subsequent: int) -> bool:
     return update.index(preceding) > update.index(subsequent)
@@ -12,17 +11,19 @@ def is_update_in_correct_order(update: list, rules: List[list]) -> bool:
             return False
     return True
 
+input = get_input(2024, 5)
+lines = input.splitlines()
+
 rules = []
 updates = []
-with open('./2024/05/input.txt', 'r') as f:
-    for line in f:
-        line = line.rstrip()
-        if '|' in line:
-            # This is a rule
-            rules.append(list(map(int, line.split('|'))))
-        elif ',' in line:
-            # This is an update list
-            updates.append(list(map(int, line.split(','))))
+for line in lines:
+    line = line.rstrip()
+    if '|' in line:
+        # This is a rule
+        rules.append(list(map(int, line.split('|'))))
+    elif ',' in line:
+        # This is an update list
+        updates.append(list(map(int, line.split(','))))
 
 # Go through the updates
 middle_pages_correct = []

@@ -1,4 +1,5 @@
 import numpy as np
+from aoc_input import get_input
 
 # Plan for the first part:
 # Get all the simbols from the map (that is different than '.')
@@ -57,38 +58,40 @@ def add_antinode(antinode: np.ndarray) -> None:
         antinodes[tuple(antinode)] = True
 
 
-with open('./2024/08/input.txt', 'rt') as f:
-    map =  np.array([list(line.strip()) for line in f.readlines()])
-    print('Initial map:')
-    print(map)
+input = get_input(2024, 8)
+lines = input.splitlines()
 
-    # Get all the simbols from the map (that is different than '.') and their coordinates
-    symbols = set(np.unique(map))
-    symbols.remove('.')
-    print(symbols)
+map =  np.array([list(line.strip()) for line in lines])
+print('Initial map:')
+print(map)
 
-    # Get the size of the map (assuming that it is square matrix)
-    map_size = map.shape[0]
+# Get all the simbols from the map (that is different than '.') and their coordinates
+symbols = set(np.unique(map))
+symbols.remove('.')
+print(symbols)
 
-    # Create helper map to store the info if an antenna is visited or not
-    # And create a map for the antinodes
-    visited_antennas = np.zeros_like(map, dtype=bool)
-    antinodes = np.zeros_like(map, dtype=bool)
+# Get the size of the map (assuming that it is square matrix)
+map_size = map.shape[0]
 
-    for symbol in symbols:
-        # So find all the antennas with 'symbol' and make a index tuple list from the positions
-        antenna_positions = tuple(np.argwhere(map == symbol))
+# Create helper map to store the info if an antenna is visited or not
+# And create a map for the antinodes
+visited_antennas = np.zeros_like(map, dtype=bool)
+antinodes = np.zeros_like(map, dtype=bool)
 
-        for antenna1 in antenna_positions:
-            print(f'Check antinodes for antenna {antenna1}')
-            visited_antennas[tuple(antenna1)] = True
-            for antenna2 in antenna_positions:
-                # Skip the visited ones (This will also skip 'antenna1' as that is already set to visited)
-                if visited_antennas[tuple(antenna2)]:
-                    continue
+for symbol in symbols:
+    # So find all the antennas with 'symbol' and make a index tuple list from the positions
+    antenna_positions = tuple(np.argwhere(map == symbol))
 
-                calculate_antinode_2(antenna1, antenna2)
-                print('Antinode map:')
-                print(antinodes)
-    num_antinodes = np.count_nonzero(antinodes)
-    print(f'Overall there is {num_antinodes}')
+    for antenna1 in antenna_positions:
+        print(f'Check antinodes for antenna {antenna1}')
+        visited_antennas[tuple(antenna1)] = True
+        for antenna2 in antenna_positions:
+            # Skip the visited ones (This will also skip 'antenna1' as that is already set to visited)
+            if visited_antennas[tuple(antenna2)]:
+                continue
+
+            calculate_antinode_2(antenna1, antenna2)
+            print('Antinode map:')
+            print(antinodes)
+num_antinodes = np.count_nonzero(antinodes)
+print(f'Overall there is {num_antinodes}')

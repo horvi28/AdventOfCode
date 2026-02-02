@@ -1,6 +1,5 @@
-# https://adventofcode.com/2024/day/2
-
 import numpy as np
+from aoc_input import get_input
 
 def is_safe(report: list) -> bool:
     diff = np.diff(report)
@@ -16,15 +15,17 @@ def problem_dampener_can_make_it_safe(report: list) -> bool:
             return True
     return False
 
+input = get_input(2024, 2)
+lines = input.splitlines()
+
 safe_report = 0
-with open('./2024/02/input.txt', 'r') as f:
-    for line in f:
-        report = np.fromstring(line, dtype=int, sep=' ')
+for line in lines:
+    report = np.fromstring(line, dtype=int, sep=' ')
 
-        if is_safe(report) or problem_dampener_can_make_it_safe(report):
-            print(f'{report}: Safe')
-            safe_report += 1
-        else:
-            print(f'{report}: Unsafe')
+    if is_safe(report) or problem_dampener_can_make_it_safe(report):
+        print(f'{report}: Safe')
+        safe_report += 1
+    else:
+        print(f'{report}: Unsafe')
 
-    print(f'Number of safe reports: {safe_report}')
+print(f'Number of safe reports: {safe_report}')

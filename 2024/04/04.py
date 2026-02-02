@@ -1,9 +1,9 @@
-# https://adventofcode.com/2024/day/4
-
 import numpy as np
+from aoc_input import get_input_file
 
 # Read the data into a matrix of characters
-data = np.genfromtxt('./2024/04/input.txt', dtype='str')
+input_path = get_input_file(2024, 4)
+data = np.genfromtxt(input_path, dtype='str')
 data = np.array([list(line) for line in data])
 
 ## Helper method to look for the next characters in any direction

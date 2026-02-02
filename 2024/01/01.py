@@ -1,12 +1,14 @@
-# https://adventofcode.com/2024/day/1
+from aoc_input import get_input
 
-with open('./2024/01/testinput.txt', 'r') as f:
-    left_list = []
-    right_list = []
-    for line in f:
-        numbers = line.split()
-        left_list.append(int(numbers[0]))
-        right_list.append(int(numbers[1]))
+input = get_input(2024, 1)
+lines = input.splitlines()
+
+left_list = []
+right_list = []
+for line in lines:
+    numbers = line.split()
+    left_list.append(int(numbers[0]))
+    right_list.append(int(numbers[1]))
 left_list.sort()
 right_list.sort()
 sub_list = [abs(b - a) for a, b in zip(left_list, right_list)]

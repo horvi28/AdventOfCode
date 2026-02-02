@@ -1,7 +1,6 @@
-# https://adventofcode.com/2024/day/6
-
 import numpy as np
 from typing import List, Tuple
+from aoc_input import get_input
 
 def get_path_in_front_of_guard(map: np.array, guard_pos: list, guard_direction: str) -> list:
     if guard_direction == '^':
@@ -49,27 +48,29 @@ def get_new_pos_and_direction(direction: str, pos: List[int], steps: int) -> Tup
     
     return new_pos, new_direction
 
-with open('./2024/06/input.txt', 'rt') as f:
-    map =  np.array([list(line.strip()) for line in f.readlines()])
-    print('Initial map:')
+input = get_input(2024, 6)
+lines = input.splitlines()
+
+map =  np.array([list(line.strip()) for line in lines])
+print('Initial map:')
+print(map)
+
+# Find the guard
+guard_direction = '^'
+guard_pos = np.squeeze(np.where(map == '^'))
+
+# The guard is moving forward until it finds an obstacle
+has_left = False
+while not has_left:
+    # Get the path ahead from the point of the guard
+    path = get_path_in_front_of_guard(map, guard_pos, guard_direction)
+    steps, has_left = guard_moving_forward(path)
+
+    # Get the guard new position and direction
+    guard_pos, guard_direction = get_new_pos_and_direction(guard_direction, guard_pos, steps)
+
+    print('Map after moving:')
     print(map)
-
-    # Find the guard
-    guard_direction = '^'
-    guard_pos = np.squeeze(np.where(map == '^'))
-
-    # The guard is moving forward until it finds an obstacle
-    has_left = False
-    while not has_left:
-        # Get the path ahead from the point of the guard
-        path = get_path_in_front_of_guard(map, guard_pos, guard_direction)
-        steps, has_left = guard_moving_forward(path)
-
-        # Get the guard new position and direction
-        guard_pos, guard_direction = get_new_pos_and_direction(guard_direction, guard_pos, steps)
-
-        print('Map after moving:')
-        print(map)
     
     # Count the visited positions
     print(f'Number of visited positions: {np.count_nonzero(map == "X")}')

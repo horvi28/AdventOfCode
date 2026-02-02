@@ -1,5 +1,6 @@
 import itertools
 from typing import List
+from aoc_input import get_input
 
 def gen_operation(numbers: List[str]):
     operators = ['+', '*', '||']
@@ -35,17 +36,19 @@ def is_valid_test_value(test_value: int, numbers: List[str]) -> bool:
     return False
 
 
+input = get_input(2024, 7)
+lines = input.splitlines()
+
 sum = 0
-with open('./2024/07/input.txt', 'r') as f:
-    for line in f:
-        line = line.rstrip()
-        data = line.split(':')
-        test_value = int(data[0])
-        numbers = data[1].split()
+for line in lines:
+    line = line.rstrip()
+    data = line.split(':')
+    test_value = int(data[0])
+    numbers = data[1].split()
 
-        #print(f'Test value: {test_value}, numbers: {numbers}')
+    #print(f'Test value: {test_value}, numbers: {numbers}')
 
-        if is_valid_test_value(test_value, numbers):
-            sum += test_value
+    if is_valid_test_value(test_value, numbers):
+        sum += test_value
 print(f'Total sum of the valid test values: {sum}')
 

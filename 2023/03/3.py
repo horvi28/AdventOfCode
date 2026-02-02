@@ -8,3 +8,8 @@
 # | |x|x|x|x| |
 # | | | | | | |
 # ~~~~~~~~~~~~~
+
+from aoc_input import get_input
+
+input = get_input(2023, 3)
+lines = input.splitlines()

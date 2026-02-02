@@ -1,4 +1,5 @@
 import re
+from aoc_input import get_input
 
 pattern_dict = {
     "red": re.compile("(?P<red>\d*) red"),
@@ -54,8 +55,10 @@ def fewest_cubes_game(game: str) -> int:
     return red * green * blue
 
 
-with open("2/input.txt", "r") as f:
-    game_id_sum = 0
-    for line in f:
-        game_id_sum += fewest_cubes_game(line)
-    print(game_id_sum)
+input = get_input(2023, 2)
+lines = input.splitlines()
+
+game_id_sum = 0
+for line in lines:
+    game_id_sum += fewest_cubes_game(line)
+print(game_id_sum)
